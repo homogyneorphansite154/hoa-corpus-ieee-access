@@ -1,6 +1,6 @@
 # Revision results - bootstrap uncertainty analysis
 
-Outputs of `../revision_stats.py`, added during peer review of the IEEE Access corpus
+Outputs of `../pyscripts/revision_stats.py`, added during peer review of the IEEE Access corpus
 paper to attach uncertainty estimates to the microphone-comparison results.
 
 ## Resampling design
@@ -54,8 +54,8 @@ of session audio**. Re-running `revision_stats.py` reuses any cache it finds and
 streams WAV files whose cache is missing:
 
 ```sh
-python3 ../revision_stats.py --base-dir /any/path    # caches present -> no audio read
-python3 ../revision_figures.py
+python3 ../pyscripts/revision_stats.py --base-dir /any/path    # caches present -> no audio read
+python3 ../pyscripts/revision_figures.py
 ```
 
 To rebuild the caches from the audio, delete `cache/` and pass the real corpus path

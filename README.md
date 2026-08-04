@@ -30,12 +30,12 @@ For methodology, interpretation, and results discussion, please refer to the man
 │   ├── generate_map_only.py          # Fig. 4 maps standalone (from CSV)
 │   ├── plot_rt60.py                  # Fig. 3 standalone
 │   ├── plot_lufs_distribution.py     # Fig. 6 standalone
-│   └── plot_spectral_comparison.py   # Fig. 7 standalone (needs audio)
+│   ├── plot_spectral_comparison.py   # Fig. 7 standalone (needs audio)
+│   ├── revision_stats.py             # Paired moving-block bootstrap (confidence intervals)
+│   └── revision_figures.py           # Two-piece Fig. 9, Figs 10a/10b with CI whiskers
 ├── plots/                            # Pre-computed figure inputs (CSV)
 ├── figures/                          # Rendered corpus figures (Figs 3-10), committed
 ├── data/                             # Render statistics, aggregated LaTeX macros, session inventory
-├── revision_stats.py                 # Paired moving-block bootstrap (confidence intervals)
-├── revision_figures.py               # Two-piece Fig. 9, Figs 10a/10b with CI whiskers
 ├── revision_results/                 # Bootstrap outputs - see revision_results/README.md
 │   ├── spatial_energy_two_piece.csv  #   Per-order dBFS + 95% CIs, both pieces
 │   ├── rolloff_bootstrap.csv         #   Rolloff + paired between-array difference
@@ -105,8 +105,8 @@ CSV results  ->  generate_latex_variables.py  ->  data/all_variables.tex  ->  \i
 `revision_stats.py` attaches confidence intervals to the microphone-comparison results, added during peer review to address reviewer requests for statistical treatment. Each recording of the co-located comparison session (2024-08-15) is analysed in 1-second frames; because all arrays captured the same performance simultaneously, frames are **paired across arrays by wall-clock time**, so the between-array rolloff difference is resampled as a paired statistic and the programme-level variance shared by both arrays cancels. Resampling uses a moving-block bootstrap (30-second blocks, 2000 replicates, fixed seed) to respect the temporal correlation of musical material.
 
 ```sh
-python3 revision_stats.py --base-dir /path/to/hoa-corpus   # frame caches + CIs
-python3 revision_figures.py                                # figures with CI whiskers
+python3 pyscripts/revision_stats.py --base-dir /path/to/hoa-corpus   # frame caches + CIs
+python3 pyscripts/revision_figures.py                                # figures with CI whiskers
 ```
 
 The frame-energy caches in `revision_results/cache/` are committed (~1.2 MB), so both commands reproduce every statistic and figure **without downloading the ~48 GB of session audio** - `revision_stats.py` only reads WAV files whose cache is missing. Full details, the resampling rationale, and the headline numbers are in [`revision_results/README.md`](revision_results/README.md).

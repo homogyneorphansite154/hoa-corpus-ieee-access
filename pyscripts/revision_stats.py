@@ -162,7 +162,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-dir", type=Path, required=True)
     ap.add_argument("--out", type=Path,
-                    default=Path(__file__).resolve().parent / "revision_results")
+                    default=Path(__file__).resolve().parent.parent / "revision_results")
     args = ap.parse_args()
 
     render_dir = args.base_dir / SESSION_AUG15 / "render"

@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 # Paths are resolved relative to this file so the script runs from a clean clone.
 # Override the figure output directory with the IEEE_FIG_DIR environment variable
 # (e.g. point it at the manuscript's figures/ folder).
-SCRIPT_DIR = Path(__file__).resolve().parent
+SCRIPT_DIR = Path(__file__).resolve().parent.parent
 REV_RESULTS = Path(os.environ.get("REVISION_RESULTS_DIR", SCRIPT_DIR / "revision_results"))
 IEEE_FIG_DIR = Path(os.environ.get("IEEE_FIG_DIR", SCRIPT_DIR / "revision_results" / "figures"))
 IEEE_FIG_DIR.mkdir(parents=True, exist_ok=True)
