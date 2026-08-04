@@ -11,12 +11,12 @@ authors:
     given-names: "Szymon"
     orcid: "https://orcid.org/0000-0003-0814-1097"
     affiliation: "Gdańsk University of Technology"
-date-released: 2026-08-04
-version: "1.0"
-abstract: "Reproducible Python pipeline for the IEEE Access paper \"A Seven-Year Higher-Order Ambisonics Recording Corpus\" - corpus-wide figures (geography, timeline, room acoustics, loudness, session inventory), LaTeX-macro generation for every numeric claim, and the peer-review bootstrap uncertainty analysis for the microphone-comparison results."
+abstract: "Reproducible Python pipeline for the IEEE Access paper \"A Seven-Year Higher-Order Ambisonics Recording Corpus\" - corpus-wide figures (geography, timeline, room acoustics, loudness, session inventory), LaTeX-macro generation for every numeric claim, and the peer-review bootstrap uncertainty analysis for the microphone-comparison results. The recording corpus itself is deposited separately at doi.org/10.34808/w8bx-2094."
 repository-code: "https://github.com/mormegil6/hoa-corpus-ieee-access"
 url: "https://github.com/mormegil6/hoa-corpus-ieee-access"
-license: "CC-BY-4.0"
+license: CC-BY-4.0
+version: 1.0.0
+date-released: 2026-08-04
 keywords:
   - ambisonics
   - higher-order ambisonics
@@ -26,53 +26,18 @@ keywords:
   - audio analysis
   - spatial audio
   - HOA
-references:
-  - type: article
-    authors:
-      - family-names: "Mróz"
-        given-names: "Bartłomiej"
-        orcid: "https://orcid.org/0000-0002-8983-9050"
-      - family-names: "Zaporowski"
-        given-names: "Szymon"
-        orcid: "https://orcid.org/0000-0003-0814-1097"
-    title: "A Seven-Year Higher-Order Ambisonics Recording Corpus: Dataset, Methodology, and a Co-Located Spherical Microphone Array Comparison"
-    journal: "IEEE Access"
-    status: "submitted"
-    year: 2026
-  - type: software
-    authors:
-      - family-names: "Mróz"
-        given-names: "Bartłomiej"
-        orcid: "https://orcid.org/0000-0002-8983-9050"
-      - family-names: "Zaporowski"
-        given-names: "Szymon"
-        orcid: "https://orcid.org/0000-0003-0814-1097"
-    title: "ZM-1 vs Spcmic: HOA Recording Performance Analysis"
-    repository-code: "https://github.com/mormegil6/hoa-mic-comparison-aes2026"
-    year: 2026
-  - type: data
-    authors:
-      - family-names: "Mróz"
-        given-names: "Bartłomiej"
-        orcid: "https://orcid.org/0000-0002-8983-9050"
-      - family-names: "Zaporowski"
-        given-names: "Szymon"
-        orcid: "https://orcid.org/0000-0003-0814-1097"
-    title: "A Seven-Year Corpus of Higher-Order Ambisonics Recordings"
-    repository-code: "https://mostwiedzy.pl/en/open-research-data/a-seven-year-corpus-of-higher-order-ambisonics-recordings,205035347247528-0"
-    month: 2
-    year: 2026
-    publisher:
-      name: "MOST Danych, Gdańsk University of Technology"
-    doi: "10.34808/W8BX-2094"
-    keywords:
-      - Ambisonics
-      - B-format
-      - Higher-Order Ambisonics
-      - immersive audio
-      - MEMS microphone
-      - music recording
-      - recording corpus
-      - room acoustics
-      - spatial audio
-      - spherical microphone array
+preferred-citation:
+  type: article
+  title: "A Seven-Year Higher-Order Ambisonics Recording Corpus: Dataset, Methodology, and a Co-Located Spherical Microphone Array Comparison"
+  authors:
+    - family-names: "Mróz"
+      given-names: "Bartłomiej"
+      orcid: "https://orcid.org/0000-0002-8983-9050"
+    - family-names: "Zaporowski"
+      given-names: "Szymon"
+      orcid: "https://orcid.org/0000-0003-0814-1097"
+  journal: "IEEE Access"
+  publisher:
+    name: "IEEE"
+  year: 2026
+  status: submitted
