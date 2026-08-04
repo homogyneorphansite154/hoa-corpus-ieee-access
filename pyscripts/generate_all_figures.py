@@ -278,28 +278,33 @@ def plot_lufs_corpus():
 # =============================================================================
 # FIGURE 4: Geographic Map (with and without outliers)
 # =============================================================================
-def plot_geographic_map():
+def load_locations_from_csv(csv_path):
+    """Read the Fig. 4 location table, the publishable stand-in for the session
+    metadata YAMLs (which carry unpublished fields and are not distributed)."""
+    locations = []
+    with open(csv_path, newline='', encoding='utf-8') as f:
+        for row in csv.DictReader(f):
+            locations.append({
+                'session': row['venue'],
+                'venue': row['venue'],
+                'city': row['city'],
+                'latitude': float(row['latitude']),
+                'longitude': float(row['longitude']),
+                'content_type': row['content_type'],
+                'is_outdoor': str(row.get('is_outdoor', '')).strip().lower() == 'true',
+            })
+    return locations
+
+
+def plot_geographic_map(locations=None, output_dir=None):
     """Geographic distribution of recording locations - using timeline-consistent markers."""
     print("\n[Figure 4] Geographic Map")
-    
+
+    output_dir = OUTPUT_DIR if output_dir is None else Path(output_dir)
+    if locations is not None:
+        return _render_geographic_map(locations, output_dir, write_csv=False)
+
     metadata = load_all_metadata()
-    
-    # Content type styling - SAME as timeline for consistency
-    type_styles = {
-        'solo_piano': ('#1f77b4', 'o'),       # Blue circle
-        'piano_duet': ('#1f77b4', 'o'),
-        'choir': ('#2ca02c', 's'),            # Green square
-        'choir_with_orchestra': ('#2ca02c', 's'),
-        'choir_with_soloists': ('#2ca02c', 's'),
-        'choir_with_ensemble': ('#2ca02c', 's'),
-        'orchestra': ('#d62728', 'D'),        # Red diamond
-        'ensemble': ('#d62728', 'D'),
-        'chamber': ('#9467bd', '^'),          # Purple triangle up
-        'ambient': ('#e377c2', '*'),          # Pink star
-        'ambience': ('#e377c2', '*'),
-        'vr_film_production': ('#17becf', 'v'),  # Cyan triangle down
-        'unknown': ('#7f7f7f', 'x'),          # Gray X
-    }
     
     # Extract all session data with GPS
     locations = []
@@ -326,7 +331,28 @@ def plot_geographic_map():
     if not locations:
         print("  No GPS data available")
         return
-    
+
+    return _render_geographic_map(locations, output_dir, write_csv=True)
+
+
+def _render_geographic_map(locations, output_dir, write_csv=True):
+    # Content type styling - SAME as timeline for consistency
+    type_styles = {
+        'solo_piano': ('#1f77b4', 'o'),       # Blue circle
+        'piano_duet': ('#1f77b4', 'o'),
+        'choir': ('#2ca02c', 's'),            # Green square
+        'choir_with_orchestra': ('#2ca02c', 's'),
+        'choir_with_soloists': ('#2ca02c', 's'),
+        'choir_with_ensemble': ('#2ca02c', 's'),
+        'orchestra': ('#d62728', 'D'),        # Red diamond
+        'ensemble': ('#d62728', 'D'),
+        'chamber': ('#9467bd', '^'),          # Purple triangle up
+        'ambient': ('#e377c2', '*'),          # Pink star
+        'ambience': ('#e377c2', '*'),
+        'vr_film_production': ('#17becf', 'v'),  # Cyan triangle down
+        'unknown': ('#7f7f7f', 'x'),          # Gray X
+    }
+
     # Venue name abbreviations (English, short) - must match EXACT names from metadata
     venue_abbrev = {
         'Aula Politechniki Gdańskiej (Main Aula of Gdańsk University of Technology)': 'Gdańsk Tech Aula',
@@ -520,29 +546,35 @@ def plot_geographic_map():
         plt.tight_layout()
         return fig
     
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     # Version 1: All locations - with labels (city name for Piechcin since it's remote)
     fig = _plot_map(locations, show_venue_labels=True)
-    output_png = OUTPUT_DIR / "pub_fig04_geographic_map.png"
+    output_png = output_dir / "pub_fig04_geographic_map.png"
     fig.savefig(output_png, dpi=300, bbox_inches='tight')
     plt.close(fig)
     print(f"    PNG: {output_png}")
-    
+
     # Version 2: Tri-City area - with venue labels
     tricity_locs = [loc for loc in locations if loc['city'] in ['Gdańsk', 'Gdynia', 'Sopot']]
     if len(tricity_locs) > 0 and len(tricity_locs) < len(locations):
         fig = _plot_map(tricity_locs, show_venue_labels=True, suffix='_tricity')
-        output_png_tricity = OUTPUT_DIR / "pub_fig04_geographic_map_tricity.png"
+        output_png_tricity = output_dir / "pub_fig04_geographic_map_tricity.png"
         fig.savefig(output_png_tricity, dpi=300, bbox_inches='tight')
         plt.close(fig)
         print(f"    PNG: {output_png_tricity}")
-    
-    # Save CSV (all locations)
-    csv_data = [{'venue': loc['venue'], 'city': loc['city'], 
-                 'latitude': loc['latitude'], 'longitude': loc['longitude'], 
-                 'content_type': loc['content_type']}
-                for loc in locations]
-    save_csv(csv_data, ['venue', 'city', 'latitude', 'longitude', 'content_type'], 
-             OUTPUT_DIR / "pub_fig04_geographic_map.csv")
+
+    if write_csv:
+        # is_outdoor is included so the CSV alone can drive a re-render
+        csv_data = [{'venue': loc['venue'], 'city': loc['city'],
+                     'latitude': loc['latitude'], 'longitude': loc['longitude'],
+                     'content_type': loc['content_type'],
+                     'is_outdoor': loc['is_outdoor']}
+                    for loc in locations]
+        save_csv(csv_data,
+                 ['venue', 'city', 'latitude', 'longitude', 'content_type', 'is_outdoor'],
+                 output_dir / "pub_fig04_geographic_map.csv")
 
 
 # =============================================================================

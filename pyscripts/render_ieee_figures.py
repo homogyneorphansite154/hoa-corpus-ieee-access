@@ -132,17 +132,35 @@ def render_fig03():
 # Figure 4 - Geographic map  (copy full-size render from plots/)
 # ---------------------------------------------------------------------------
 def render_fig04():
-    """Copy the full-size map renders from plots/ - these go full page width."""
-    import shutil
-    print("\n[fig04] Geographic map (copying full-size renders from plots/)")
-    for name in ("pub_fig04_geographic_map.png",
-                 "pub_fig04_geographic_map_tricity.png"):
-        src = PLOTS_DIR / name
-        if src.exists():
-            shutil.copy2(src, IEEE_FIG_DIR / name)
-            print(f"  {IEEE_FIG_DIR / name}")
-        else:
-            print(f"  Warning: {src} not found - skipping")
+    """Re-render both maps from the committed location CSV.
+
+    Needs contextily and geopandas for the basemap tiles (and network access to
+    fetch them), so unlike the other figures this one can fail on a bare install;
+    the published renders are committed under figures/ either way.
+    """
+    print("\n[fig04] Geographic map")
+    csv_path = PLOTS_DIR / "pub_fig04_geographic_map.csv"
+    if not csv_path.exists():
+        print(f"  Warning: {csv_path} not found - skipping")
+        return
+
+    # generate_all_figures imports these lazily, deep inside the plotting call,
+    # so check here rather than letting it fail halfway through rendering.
+    try:
+        import contextily  # noqa: F401
+        import geopandas  # noqa: F401
+    except ImportError:
+        print("  Skipping: needs the optional map extras")
+        print("    pip install contextily geopandas")
+        print(f"  The published renders are committed under figures/")
+        return
+
+    sys.path.insert(0, str(Path(__file__).parent))
+    from generate_all_figures import (load_locations_from_csv,
+                                      plot_geographic_map)
+
+    locations = load_locations_from_csv(csv_path)
+    plot_geographic_map(locations=locations, output_dir=IEEE_FIG_DIR)
 
 
 # ---------------------------------------------------------------------------

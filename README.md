@@ -27,10 +27,11 @@ For methodology, interpretation, and results discussion, please refer to the man
 │   ├── analyze_aula_acoustics.py     # Room-acoustic parameters (RT60, C80, ...)
 │   ├── calculate_corpus_stats.py     # Corpus size/duration/order inventory
 │   ├── generate_session_inventory.py # Session inventory LaTeX table
+│   ├── generate_map_only.py          # Fig. 4 maps standalone (from CSV)
 │   ├── plot_rt60.py                  # Fig. 3 standalone
 │   ├── plot_lufs_distribution.py     # Fig. 6 standalone
 │   └── plot_spectral_comparison.py   # Fig. 7 standalone (needs audio)
-├── plots/                            # Pre-computed figure inputs (CSV + the two basemap renders)
+├── plots/                            # Pre-computed figure inputs (CSV)
 ├── figures/                          # Rendered corpus figures (Figs 3-10), committed
 ├── data/                             # Render statistics, aggregated LaTeX macros, session inventory
 ├── revision_stats.py                 # Paired moving-block bootstrap (confidence intervals)
@@ -68,6 +69,19 @@ Figures are written to `figures/`, where the versions used in the manuscript are
 committed, so they can be inspected without running anything. Set `IEEE_FIG_DIR` to
 render somewhere else instead (`IEEE_DATA_DIR` does the same for the session-inventory
 table emitted by `generate_session_inventory.py`).
+
+Fig. 4 is the one exception to the plain `pip install -r requirements.txt`: the maps are
+drawn over OpenStreetMap/CARTO basemap tiles, so they additionally need
+
+```sh
+pip install contextily geopandas      # plus network access for the tiles
+python3 pyscripts/generate_map_only.py    # or render_ieee_figures.py 04
+```
+
+Without those the remaining figures render normally and Fig. 4 is skipped with a notice.
+Both maps are built from `plots/pub_fig04_geographic_map.csv`, which carries the venue
+coordinates, content types, and indoor/outdoor flags, so no unpublished session metadata
+is required.
 
 Two exceptions need the audio: Fig. 7 (spectral comparison) and any re-run of `generate_all_figures.py`, which recomputes the CSVs from the WAV files:
 
