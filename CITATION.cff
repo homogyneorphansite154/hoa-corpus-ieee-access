@@ -1,0 +1,71 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the associated paper."
+type: software
+title: "HOA Seven-Year Corpus - IEEE Access Analysis Pipeline"
+authors:
+  - family-names: "Mróz"
+    given-names: "Bartłomiej"
+    orcid: "https://orcid.org/0000-0003-4850-9395"
+    affiliation: "Gdańsk University of Technology"
+  - family-names: "Zaporowski"
+    given-names: "Szymon"
+    affiliation: "Gdańsk University of Technology"
+date-released: 2026-08-04
+version: "1.0"
+abstract: "Reproducible Python pipeline for the IEEE Access paper \"A Seven-Year Higher-Order Ambisonics Recording Corpus\" - corpus-wide figures (geography, timeline, room acoustics, loudness, session inventory), LaTeX-macro generation for every numeric claim, and the peer-review bootstrap uncertainty analysis for the microphone-comparison results."
+repository-code: "https://github.com/mormegil6/hoa-corpus-ieee-access"
+url: "https://github.com/mormegil6/hoa-corpus-ieee-access"
+license: "CC-BY-4.0"
+keywords:
+  - ambisonics
+  - higher-order ambisonics
+  - IEEE Access
+  - reproducible research
+  - bootstrap confidence intervals
+  - audio analysis
+  - spatial audio
+  - HOA
+references:
+  - type: article
+    authors:
+      - family-names: "Mróz"
+        given-names: "Bartłomiej"
+      - family-names: "Zaporowski"
+        given-names: "Szymon"
+    title: "A Seven-Year Higher-Order Ambisonics Recording Corpus: Dataset, Methodology, and a Co-Located Spherical Microphone Array Comparison"
+    journal: "IEEE Access"
+    status: "submitted"
+    year: 2026
+  - type: software
+    authors:
+      - family-names: "Mróz"
+        given-names: "Bartłomiej"
+      - family-names: "Zaporowski"
+        given-names: "Szymon"
+    title: "ZM-1 vs Spcmic: HOA Recording Performance Analysis"
+    repository-code: "https://github.com/mormegil6/hoa-mic-comparison-aes2026"
+    year: 2026
+  - type: data
+    authors:
+      - family-names: "Mróz"
+        given-names: "Bartłomiej"
+      - family-names: "Zaporowski"
+        given-names: "Szymon"
+    title: "A Seven-Year Corpus of Higher-Order Ambisonics Recordings"
+    repository-code: "https://mostwiedzy.pl/en/open-research-data/a-seven-year-corpus-of-higher-order-ambisonics-recordings,205035347247528-0"
+    month: 2
+    year: 2026
+    publisher:
+      name: "MOST Danych, Gdańsk University of Technology"
+    doi: "10.34808/W8BX-2094"
+    keywords:
+      - Ambisonics
+      - B-format
+      - Higher-Order Ambisonics
+      - immersive audio
+      - MEMS microphone
+      - music recording
+      - recording corpus
+      - room acoustics
+      - spatial audio
+      - spherical microphone array

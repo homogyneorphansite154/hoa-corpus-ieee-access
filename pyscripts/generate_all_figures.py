@@ -59,7 +59,7 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 CORPUS_ROOT = Path(os.environ.get("HOA_CORPUS_DIR", "/Volumes/PNY 1TB/HOA recordings by BM - all"))
 MIC_COMPARISON_SESSION = CORPUS_ROOT / "2024.08.15 -- ZM1 Spcmic Saramonic" / "render"
 
-# Microphone files - CORRECT ORDER: 1OA → 3OA → 3OA → 5OA
+# Microphone files - CORRECT ORDER: 1OA -> 3OA -> 3OA -> 5OA
 MIC_ORDER = [
     ("SR-VRMIC (1OA)", "1OA_SRVRMIC_CFranck-PreludeChoralFugue.wav", "#d62728", 1),  # Red
     ("ZM-1 (3OA)", "3OA_ZM1_CFranck-PreludeChoralFugue.wav", "#1f77b4", 3),           # Blue
@@ -428,7 +428,7 @@ def plot_geographic_map():
             label_offset = half_m * 0.15  # 15% of map half-size
             
             # Manual direction overrides for specific venues (angle in radians)
-            # Angles: 0=right, π/2≈1.57=up, π≈3.14=left, -π/2≈-1.57=down
+            # Angles: 0=right, π/2~1.57=up, π~3.14=left, -π/2~-1.57=down
             # Different directions for each map version
             if suffix == '_tricity':
                 # Small tri-city map directions

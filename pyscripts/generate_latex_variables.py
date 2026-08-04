@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""
+r"""
 Generate LaTeX variable files from CSV data for the HOA Corpus paper.
 
 This script reads CSV files from plots/ and data/ directories and generates

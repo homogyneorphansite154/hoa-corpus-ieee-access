@@ -90,7 +90,7 @@ def fig09_two_piece(rows):
     out = IEEE_FIG_DIR / "pub_fig09_spatial_energy_2piece.png"
     fig.savefig(out, dpi=DPI, bbox_inches='tight')
     plt.close(fig)
-    print(f"  ✓  {out}")
+    print(f"  {out}")
 
 
 def fig10_ci(rows):
@@ -118,7 +118,7 @@ def fig10_ci(rows):
     out1 = IEEE_FIG_DIR / "pub_fig10a_w_channel_level_ci.png"
     fig1.savefig(out1, dpi=DPI, bbox_inches='tight')
     plt.close(fig1)
-    print(f"  ✓  {out1}")
+    print(f"  {out1}")
 
     # --- 10b: X/Y/Z over W with CI ---
     comp_colors = {'X': '#d62728', 'Y': '#1f77b4', 'Z': '#2ca02c'}
@@ -147,7 +147,7 @@ def fig10_ci(rows):
     out2 = IEEE_FIG_DIR / "pub_fig10b_xyz_normalized_ci.png"
     fig2.savefig(out2, dpi=DPI, bbox_inches='tight')
     plt.close(fig2)
-    print(f"  ✓  {out2}")
+    print(f"  {out2}")
 
 
 if __name__ == "__main__":

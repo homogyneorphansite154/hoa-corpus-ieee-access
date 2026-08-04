@@ -9,13 +9,14 @@ Author: Bartłomiej Mróz
 Date: 2026-01-28
 """
 
+import os
 import yaml
 from pathlib import Path
 from datetime import datetime
 
 SCRIPT_DIR = Path(__file__).parent.parent
 METADATA_DIR = SCRIPT_DIR / "data" / "metadata"
-OUTPUT_DIR = SCRIPT_DIR / "template IEEE Access" / "data"
+OUTPUT_DIR = Path(os.environ.get("IEEE_DATA_DIR", SCRIPT_DIR / "data"))
 
 
 def load_all_metadata():

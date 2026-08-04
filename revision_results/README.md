@@ -27,7 +27,7 @@ source distances - the manuscript's Limitations section states this explicitly.
 
 | File | Contents |
 |---|---|
-| `spatial_energy_two_piece.csv` | Per-order dBFS with 95% CIs, every array × both pieces |
+| `spatial_energy_two_piece.csv` | Per-order dBFS with 95% CIs, every array x both pieces |
 | `rolloff_bootstrap.csv` | 0th-to-3rd rolloff per array and the **paired** between-array difference, with CI and bootstrap SE |
 | `directional_ci.csv` | W level and X/Y/Z-over-W ratios with 95% CIs |
 | `revision_stats_variables.tex` | `\newcommand` macros consumed by the manuscript |
@@ -40,15 +40,15 @@ source distances - the manuscript's Limitations section states this explicitly.
 
 | Quantity | Point estimate | 95% CI |
 |---|---|---|
-| ZM-1 rolloff 0→3, Franck | 27.4 dB | 27.0-28.3 |
-| ZM-1 rolloff 0→3, Prokofiev | 26.0 dB | 25.4-27.1 |
-| Spcmic (3OA) rolloff 0→3, both pieces | 8.4 / 8.5 dB | width < 0.1 dB |
+| ZM-1 rolloff 0->3, Franck | 27.4 dB | 27.0-28.3 |
+| ZM-1 rolloff 0->3, Prokofiev | 26.0 dB | 25.4-27.1 |
+| Spcmic (3OA) rolloff 0->3, both pieces | 8.4 / 8.5 dB | width < 0.1 dB |
 | **Paired difference, Franck** | **19.0 dB** | **18.5-19.8** (SE 0.34) |
 | **Paired difference, Prokofiev** | **17.5 dB** | **16.9-18.6** (SE 0.45) |
 
 ## Reproducing without the audio
 
-The `cache/*.npz` frame-energy caches are committed (≈1.2 MB total), so the bootstrap,
+The `cache/*.npz` frame-energy caches are committed (~1.2 MB total), so the bootstrap,
 the derived CSVs, and the figures can be regenerated **without downloading the ~48 GB
 of session audio**. Re-running `revision_stats.py` reuses any cache it finds and only
 streams WAV files whose cache is missing:

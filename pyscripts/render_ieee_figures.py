@@ -5,7 +5,7 @@ Render publication figures sized for IEEE Access two-column format.
 IEEE single-column width = 3.5 in. All font sizes are set for that printed
 width at 300 DPI - no reliance on post-render scaling.
 
-Output: template IEEE Access/figures/  (overwrites existing pub_fig* files)
+Output: figures/  (override with the IEEE_FIG_DIR environment variable)
 
 Figures produced:
   pub_fig03  RT60 octave bands          (CSV)
@@ -25,6 +25,7 @@ Usage:
     python render_ieee_figures.py 06 09 10      # selected figure numbers
 """
 
+import os
 import sys
 import csv
 import warnings
@@ -46,7 +47,7 @@ warnings.filterwarnings('ignore')
 SCRIPT_DIR   = Path(__file__).parent.parent          # corpus root
 PLOTS_DIR    = SCRIPT_DIR / "plots"
 DATA_DIR     = SCRIPT_DIR / "data"
-IEEE_FIG_DIR = SCRIPT_DIR / "template IEEE Access" / "figures"
+IEEE_FIG_DIR = Path(os.environ.get("IEEE_FIG_DIR", SCRIPT_DIR / "figures"))
 IEEE_FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
@@ -89,7 +90,7 @@ def _save(fig, name):
     out = IEEE_FIG_DIR / name
     fig.savefig(out, dpi=DPI, bbox_inches='tight')
     plt.close(fig)
-    print(f"  ✓  {out}")
+    print(f"  {out}")
 
 
 # ---------------------------------------------------------------------------
@@ -139,7 +140,7 @@ def render_fig04():
         src = PLOTS_DIR / name
         if src.exists():
             shutil.copy2(src, IEEE_FIG_DIR / name)
-            print(f"  ✓  {IEEE_FIG_DIR / name}")
+            print(f"  {IEEE_FIG_DIR / name}")
         else:
             print(f"  Warning: {src} not found - skipping")
 
@@ -147,7 +148,7 @@ def render_fig04():
 # ---------------------------------------------------------------------------
 # Figure 5 - Recording timeline  (rendered at full textwidth, compact height)
 # ---------------------------------------------------------------------------
-# IEEE Access textwidth ≈ 7.0 in (505 pt).  Timeline is figure* so it uses
+# IEEE Access textwidth ~ 7.0 in (505 pt).  Timeline is figure* so it uses
 # the full two-column width.  Height is kept very short - events are just dots.
 TW = 7.0   # target printed width for figure* floats
 
@@ -329,7 +330,7 @@ def render_fig08():
             raw_labels.append(row['label'])
             values.append(float(row['lufs_i']))
 
-    # Split "Mic (OA): PieceName" → two-line label "Mic (OA)\nPieceName"
+    # Split "Mic (OA): PieceName" -> two-line label "Mic (OA)\nPieceName"
     def _two_line(lbl):
         if ': ' in lbl:
             mic, piece = lbl.split(': ', 1)
@@ -531,7 +532,7 @@ def main():
         print(f"Available: {sorted(FIGURES.keys())}")
         sys.exit(1)
 
-    print(f"Output → {IEEE_FIG_DIR}")
+    print(f"Output -> {IEEE_FIG_DIR}")
     for fig_id in requested:
         FIGURES[fig_id]()
 

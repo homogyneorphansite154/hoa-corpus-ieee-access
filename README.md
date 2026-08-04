@@ -12,7 +12,7 @@ This repository contains:
 - The microphone-comparison bootstrap uncertainty analysis added during peer review (confidence intervals on the per-order energy rolloff)
 - Pre-computed results (CSV tables, LaTeX macros, publication figures) so most of the repository reproduces without downloading any audio
 
-For methodology, interpretation, and results discussion, please refer to the manuscript. The comparison session's core signal analysis (per-order RMS, LUFS, spectral, directional metrics) was first published for the companion AES Copenhagen paper; see [hoa-mic-comparison-aes2026](https://git.pg.edu.pl/p829296/hoa-mic-comparison-aes2026) for that repository. `revision_stats.py` here reimplements the same per-order metric definition rather than depending on that repo, so this repository is self-contained.
+For methodology, interpretation, and results discussion, please refer to the manuscript. The comparison session's core signal analysis (per-order RMS, LUFS, spectral, directional metrics) was first published for the companion AES Copenhagen paper; see [hoa-mic-comparison-aes2026](https://github.com/mormegil6/hoa-mic-comparison-aes2026) for that repository. `revision_stats.py` here reimplements the same per-order metric definition rather than depending on that repo, so this repository is self-contained.
 
 ## Repository Structure
 
@@ -30,7 +30,8 @@ For methodology, interpretation, and results discussion, please refer to the man
 │   ├── plot_rt60.py                  # Fig. 3 standalone
 │   ├── plot_lufs_distribution.py     # Fig. 6 standalone
 │   └── plot_spectral_comparison.py   # Fig. 7 standalone (needs audio)
-├── plots/                            # Pre-computed figure inputs (CSV)
+├── plots/                            # Pre-computed figure inputs (CSV + the two basemap renders)
+├── figures/                          # Rendered corpus figures (Figs 3-10), committed
 ├── data/                             # Render statistics, aggregated LaTeX macros, session inventory
 ├── revision_stats.py                 # Paired moving-block bootstrap (confidence intervals)
 ├── revision_figures.py               # Two-piece Fig. 9, Figs 10a/10b with CI whiskers
@@ -63,6 +64,11 @@ python3 pyscripts/render_ieee_figures.py          # all figures
 python3 pyscripts/render_ieee_figures.py 09 10    # selected figure numbers
 ```
 
+Figures are written to `figures/`, where the versions used in the manuscript are also
+committed, so they can be inspected without running anything. Set `IEEE_FIG_DIR` to
+render somewhere else instead (`IEEE_DATA_DIR` does the same for the session-inventory
+table emitted by `generate_session_inventory.py`).
+
 Two exceptions need the audio: Fig. 7 (spectral comparison) and any re-run of `generate_all_figures.py`, which recomputes the CSVs from the WAV files:
 
 ```sh
@@ -89,7 +95,7 @@ python3 revision_stats.py --base-dir /path/to/hoa-corpus   # frame caches + CIs
 python3 revision_figures.py                                # figures with CI whiskers
 ```
 
-The frame-energy caches in `revision_results/cache/` are committed (≈1.2 MB), so both commands reproduce every statistic and figure **without downloading the ~48 GB of session audio** - `revision_stats.py` only reads WAV files whose cache is missing. Full details, the resampling rationale, and the headline numbers are in [`revision_results/README.md`](revision_results/README.md).
+The frame-energy caches in `revision_results/cache/` are committed (~1.2 MB), so both commands reproduce every statistic and figure **without downloading the ~48 GB of session audio** - `revision_stats.py` only reads WAV files whose cache is missing. Full details, the resampling rationale, and the headline numbers are in [`revision_results/README.md`](revision_results/README.md).
 
 ## License
 
