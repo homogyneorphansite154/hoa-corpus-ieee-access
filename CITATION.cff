@@ -15,17 +15,21 @@ abstract: "Reproducible Python pipeline for the IEEE Access paper \"A Seven-Year
 repository-code: "https://github.com/mormegil6/hoa-corpus-ieee-access"
 url: "https://github.com/mormegil6/hoa-corpus-ieee-access"
 license: CC-BY-4.0
-version: 1.0.0
+version: 1.0.1
 date-released: 2026-08-04
 keywords:
   - ambisonics
-  - higher-order ambisonics
-  - IEEE Access
-  - reproducible research
-  - bootstrap confidence intervals
-  - audio analysis
-  - spatial audio
-  - HOA
+  - bootstrap
+  - confidence-intervals
+  - corpus
+  - data-visualization
+  - higher-order-ambisonics
+  - ieee-access
+  - latex
+  - python
+  - reproducible-research
+  - room-acoustics
+  - spatial-audio
 preferred-citation:
   type: article
   title: "A Seven-Year Higher-Order Ambisonics Recording Corpus: Dataset, Methodology, and a Co-Located Spherical Microphone Array Comparison"
